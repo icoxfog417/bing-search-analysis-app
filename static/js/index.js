@@ -8,8 +8,8 @@ var app = new Vue({
         detail: null
     },
     computed: {
-        noDetail: function(){
-            if(this.detail == null){
+        hasDetail: function(){
+            if(this.detail != null){
                 return true;
             }else{
                 return false;

@@ -31,9 +31,8 @@
         </div>
     </div>
     <div class="column is-7 message hero is-fullheight" id="message-pane">
-        <div class="box message-preview" v-bind:class="{ 'is-hidden': noDetail }" >
-            <div class="top">
-            </div>
+        <div class="box message-preview" v-if="hasDetail">
+            <p v-for="desc in detail.body">[[desc]]</p>
         </div>
     </div>
 </div>

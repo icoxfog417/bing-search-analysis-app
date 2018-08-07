@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.search.websearch import WebSearchAPI
-from page_reader import get_page_text
+from page_reader import PageReader
 
 
 app = Flask(__name__)
@@ -57,11 +57,15 @@ def detail():
     url = content["url"]
     description = content["description"]
 
-
+    reader = PageReader()
+    texts = reader.get_page_text(url, description)
+    print(texts)
 
     detail = {
-        "body": "AAAA",
-        "words": []
+        "detail": {
+            "body": texts,
+            "words": []
+        }
     }
     return jsonify(detail)
 
