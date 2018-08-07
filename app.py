@@ -59,7 +59,6 @@ def detail():
 
     reader = PageReader()
     texts = reader.get_page_text(url, description)
-    print(texts)
 
     detail = {
         "detail": {
