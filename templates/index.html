@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<div class="columns" id="app">
+    <div class="column is-5 messages hero is-fullheight" id="message-feed">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Key words" v-model="query" v-on:keyup.enter="search">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+            </p>
+        </div>
+
+        <div class="inbox-messages" id="inbox-messages">
+            <div v-for="(page, index) in pages" class="card" v-bind:id="'msg-card-'+index" v-on:click="showDetail(page, index)">
+                <div class="card-content">
+                    <div class="msg-subject">
+                        <a v-bind:href="page.url" class="msg-subject" target="_blank">[[ page.title ]]</a>
+                    </div>
+                    <div class="msg-snippet">
+                        <p id="fake-snippet-1">[[ page.description ]]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-7 message hero is-fullheight" id="message-pane">
+        <div class="box message-preview" v-bind:class="{ 'is-hidden': noDetail }" >
+            <div class="top">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block tail %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+{% endblock %}
